@@ -27,6 +27,20 @@ def add_columns(df, col1='month', col2='day_of_week',
     
     return df
 
+
+def prepare_store_data(df):
+    '''
+    Takes in store data as loaded,
+    cleans the datetime and turns it to a pandas datetime,
+    which is then set as the index
+    
+    Return: pandas DF
+    '''
+    df['sale_date'] = pd.to_datetime(df.sale_date.str.replace(' 00:00:00 GMT', ''))
+    df = df.set_index('sale_date').sort_index()
+    return df
+
+
 def drop_columns_energy(df):
     '''
     '''
